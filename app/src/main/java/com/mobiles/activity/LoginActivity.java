@@ -337,9 +337,9 @@ public class LoginActivity extends AppCompatActivity {
                     waitingDialog.dismiss();
                     HashMap hashUser = (HashMap) dataSnapshot.getValue();
                     User userInfo = new User();
-                    userInfo.name = (String) hashUser.get("name");
-                    userInfo.email = (String) hashUser.get("email");
-                    userInfo.avata = (String) hashUser.get("avata");
+                    userInfo.setName((String) hashUser.get("name"));
+                    userInfo.setEmail((String) hashUser.get("email"));
+                    userInfo.setAvata((String) hashUser.get("avata"));
 //                    SharedPreferenceHelper.getInstance(LoginActivity.this).saveUserInfo(userInfo);
                 }
 
@@ -355,9 +355,9 @@ public class LoginActivity extends AppCompatActivity {
          */
         void initNewUserInfo() {
             User newUser = new User();
-            newUser.email = user.getEmail();
-            newUser.name = user.getEmail().substring(0, user.getEmail().indexOf("@"));
-            newUser.avata = MobileConstants.STR_DEFAULT_BASE64;
+            newUser.setEmail(user.getEmail());
+            newUser.setName(user.getEmail().substring(0, user.getEmail().indexOf("@")));
+            newUser.setAvata(MobileConstants.STR_DEFAULT_BASE64);
             FirebaseDatabase.getInstance().getReference().child("user/" + user.getUid()).setValue(newUser);
         }
 
